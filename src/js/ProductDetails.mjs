@@ -37,6 +37,7 @@ export default class ProductDetails
 
         async function addToCartHandler(e) {
             addToCart();
+          
         }       
     }
 
@@ -47,12 +48,17 @@ export default class ProductDetails
             cart = [];
         }
         cart.push(this.product);
-        /*
-        console.log(cart);
-        console.log(this.product);
-        console.log("Mde here");
-        */
+       
         setLocalStorage("so-cart", cart);
+        
+        //animate cart
+        let shake = "shake";
+        let cartIcon = document.getElementById("cartIcon");
+        cartIcon.classList.add(shake);  
+        setTimeout(function(){
+            cartIcon.classList.remove(shake);
+        }, 2500);
+            
     }
 
     renderProductDetails(selector){
