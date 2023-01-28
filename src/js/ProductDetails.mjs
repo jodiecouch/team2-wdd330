@@ -19,44 +19,42 @@ function productDetailsTemplate(product) {
 }
 
   
-    export default class ProductDetails {
-    constructor(productId, dataSource) {
-    this.productId = productId;
-    this.product = {};
-    this.dataSource = dataSource;
-    }
+export default class ProductDetails 
+{
+        constructor(productId, dataSource) {
+        this.productId = productId;
+        this.product = {};
+        this.dataSource = dataSource;
+        }
     async init(){
         this.product = await this.dataSource.findProductById(this.productId);
         this.renderProductDetails("main");
-console.log(this.product);
+        //console.log(this.product);
         // add listener to Add to Cart button
         document
         .getElementById("addToCart")
         .addEventListener("click", this.addToCart.bind(this));
 
-         async function addToCartHandler(e) {
-  //const product = await this.dataSource.findProductById(e.target.dataset.id);
-  addToCart(this.product);
-}
-       
+        async function addToCartHandler(e) {
+            addToCart();
+        }       
     }
-    
-    addToCart() {
-    let cart = getLocalStorage("so-cart");
-    
-    if (!Array.isArray(cart)) {
-        cart = [];
-    }
-    cart.push(this.product);
-    /*
-    console.log(cart);
-    console.log(this.product);
-    console.log("Mde here");
-    */
-    setLocalStorage("so-cart", cart);
 
+    addToCart() {
+        let cart = getLocalStorage("so-cart");
+        
+        if (!Array.isArray(cart)) {
+            cart = [];
+        }
+        cart.push(this.product);
+        /*
+        console.log(cart);
+        console.log(this.product);
+        console.log("Mde here");
+        */
+        setLocalStorage("so-cart", cart);
     }
-  
+
     renderProductDetails(selector){
         const element = document.querySelector(selector);
         element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
