@@ -6,7 +6,7 @@ import { loadHeaderFooter } from "./utils.mjs";
 loadHeaderFooter();
 
 const dataSource = new ProductData("tents");
-console.log(dataSource);
+//console.log(dataSource);
 const productId = getParam("product");
 
 const product = new ProductDetails(productId, dataSource);
