@@ -35,7 +35,6 @@ export default class ShoppingCart {
   constructor(storageKey, parentSelector) {
     this.key = storageKey;
     this.parentSelector = parentSelector;
-    
   }
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
@@ -45,30 +44,25 @@ export default class ShoppingCart {
       document.querySelector(this.parentSelector).innerHTML =
         htmlItems.join("");
 
-        //get total price of items in cart       
-       cartItems.forEach((item)=>{        
-        if (isNumeric(item.FinalPrice)){
+      //get total price of items in cart
+      cartItems.forEach((item) => {
+        if (isNumeric(item.FinalPrice)) {
           total = total + parseFloat(item.FinalPrice);
-        }      
-       }); 
-       //console.log(`Cart Total = ${total}`);
-       if (total > 0){
-      let card = document.createElement('div');
-      card.classList.add('card');
+        }
+      });
+      //console.log(`Cart Total = ${total}`);
+      if (total > 0) {
+        let card = document.createElement("div");
+        card.classList.add("card");
 
-      let cartTotal = document.createElement('p');
-      cartTotal.innerText = `Cart Total: ${total}`;
-      card.appendChild(cartTotal);
+        let cartTotal = document.createElement("p");
+        cartTotal.innerText = `Cart Total: ${total}`;
+        card.appendChild(cartTotal);
 
-      document.querySelector(this.parentSelector).insertAdjacentElement('afterend',card);
-
-       }
-      
+        document
+          .querySelector(this.parentSelector)
+          .insertAdjacentElement("afterend", card);
+      }
     }
-    
   }
-
 }
-
-
-
