@@ -71,3 +71,7 @@ export async function loadHeaderFooter(){
   renderWithTemplate(header, headerEl);
   renderWithTemplate(footer, footerEl);
 }
+
+export function isNumeric(testValue){
+  return !isNaN(testValue);
+}
