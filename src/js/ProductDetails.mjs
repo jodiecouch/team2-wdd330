@@ -1,6 +1,8 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
+  let discount = (product.FinalPrice / product.SuggestedRetailPrice) * 100; 
+  
   return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
     <img
@@ -12,6 +14,9 @@ function productDetailsTemplate(product) {
     <p class="product__color">${product.Colors[0].ColorName}</p>
     <p class="product__description">
     ${product.DescriptionHtmlSimple}
+    </p>
+    <p class="product__discount">
+    ${discount.toFixed()}% off suggested price
     </p>
     <div class="product-detail__add">
       <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
