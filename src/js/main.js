@@ -1,4 +1,4 @@
-import ProductData from "./ProductData.mjs";
+/*import ProductData from "./ProductData.mjs";
 import ProductListing from "./ProductList.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
@@ -10,3 +10,6 @@ const productList = new ProductListing("Tents", tents, list);
 productList.init();
 
 console.log(productList);
+*/
+import { loadHeaderFooter } from "./utils.mjs";
+loadHeaderFooter();
