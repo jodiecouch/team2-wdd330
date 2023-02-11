@@ -148,6 +148,23 @@ button {
 .products {
   padding: 0.5em;
 }
+.product-grid {
+  list-style: none;
+}
+.product-grid > li {
+  display: inline-block;
+  margin-right: 5em;
+  text-align: center;
+}
+.product-grid img {
+  width: 60px;
+  height: 60px;
+}
+.product-grid a {
+  text-decoration: none;
+  color: var(--font-body);
+}
+
 .product-list {
   display: flex;
   flex-flow: row wrap;
