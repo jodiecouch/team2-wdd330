@@ -14,6 +14,12 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <input type="image" src="../images/delete.png" 
+  name="cartRemove" 
+  class="cartRemove" 
+  data-id="${item.Id}"
+  />
+  
 </li>`;
 
   return newItem;
@@ -27,7 +33,6 @@ function renderCartContents() {
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
   }
 }
-
 renderCartContents();
 */
 
@@ -36,6 +41,7 @@ export default class ShoppingCart {
     this.key = storageKey;
     this.parentSelector = parentSelector;
   }
+ 
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
     let total = 0;
@@ -62,7 +68,27 @@ export default class ShoppingCart {
         document
           .querySelector(this.parentSelector)
           .insertAdjacentElement("afterend", card);
-      }
-    }
+      }     
+    }    
   }
+ 
+  addRemoveEvent(){
+      let deleteLink = document.querySelectorAll(".cartRemove")
+    
+      for (var i = 0; i < deleteLink.length; i++) {
+      deleteLink[i].addEventListener('click', function(event) {
+        
+          if (!confirm("sure u want to delete " + this.getAttribute('data-id'))) {
+              event.preventDefault();
+          }else{
+            //ELSE REMOVE ITEM FROM STORAGE
+            console.log("HOW WILL YOU REFRESH CART")
+          }
+          
+      });
+    }
+      
+    }  
+
+  
 }
