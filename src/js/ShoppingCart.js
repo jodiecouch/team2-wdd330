@@ -1,4 +1,4 @@
-import { getLocalStorage, isNumeric } from "./utils.mjs";
+import { getLocalStorage } from "./utils.mjs";
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
@@ -19,50 +19,25 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-/** 
-function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  if (Array.isArray(cartItems)) {
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    document.querySelector(".product-list").innerHTML = htmlItems.join("");
-  }
-}
-
-renderCartContents();
-*/
-
 export default class ShoppingCart {
-  constructor(storageKey, parentSelector) {
-    this.key = storageKey;
+  constructor(key, parentSelector) {
+    this.key = key;
     this.parentSelector = parentSelector;
+    this.total = 0;
+  }
+  async init() {
+    const list = getLocalStorage(this.key);
+    this.calculateListTotal(list);
+    this.renderCartContents(list);
+  }
+  calculateListTotal(list) {
+    const amounts = list.map((item) => item.FinalPrice);
+    this.total = amounts.reduce((sum, item) => sum + item);
   }
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
-    let total = 0;
-    if (Array.isArray(cartItems)) {
-      const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-      document.querySelector(this.parentSelector).innerHTML =
-        htmlItems.join("");
-
-      //get total price of items in cart
-      cartItems.forEach((item) => {
-        if (isNumeric(item.FinalPrice)) {
-          total = total + parseFloat(item.FinalPrice);
-        }
-      });
-      //console.log(`Cart Total = ${total}`);
-      if (total > 0) {
-        let card = document.createElement("div");
-        card.classList.add("card");
-
-        let cartTotal = document.createElement("p");
-        cartTotal.innerText = `Cart Total: ${total}`;
-        card.appendChild(cartTotal);
-
-        document
-          .querySelector(this.parentSelector)
-          .insertAdjacentElement("afterend", card);
-      }
-    }
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
+    document.querySelector(".list-total").innerText += ` $${this.total}`;
   }
 }
