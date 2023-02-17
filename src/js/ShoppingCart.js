@@ -4,7 +4,7 @@ function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
@@ -32,15 +32,29 @@ export default class ShoppingCart {
     this.renderCartContents(list);
   }
   calculateListTotal(list) {
-    const amounts = list.map((item) => item.FinalPrice);
-    this.total = amounts.reduce((sum, item) => sum + item);
+    if (Array.isArray(list)){
+        const amounts = list.map((item) => item.FinalPrice);
+        this.total = amounts.reduce((sum, item) => sum + item);
+    }
+    else{
+      this.total = 0;
+    }
+    
   }
  
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
-    document.querySelector(".list-total").innerText += ` $${this.total}`;
+     if (Array.isArray(cartItems)){
+        const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+        document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
+        document.querySelector(".list-total").innerText += ` $${this.total.toFixed(2)}`;
+      }
+      else{
+        document.querySelector(".list-footer").classList.add("hide");
+      }
+    
+     
+     
   }
  
    
