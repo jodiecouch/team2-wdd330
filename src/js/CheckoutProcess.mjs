@@ -1,4 +1,6 @@
+
 import { getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
+ main
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -96,5 +98,6 @@ export default class CheckoutProcess {
         }
         console.log(err);
       }
+
   }
 }

@@ -96,6 +96,7 @@ export function alertMessage(message, scroll = true, duration = 3000) {
   // setTimeout(function () {
   //   main.removeChild(alert);
   // }, duration);
+
 }
 
 export function removeAllAlerts() {
