@@ -13,3 +13,10 @@ console.log(productList);
 */
 import { loadHeaderFooter } from "./utils.mjs";
 loadHeaderFooter();
+
+const cartLogo = document.querySelector(".cart");
+
+let superScript = document.createElement("sup");
+superScript.textContent = localStorage.length;
+
+cartLogo.appendChild(superScript);
