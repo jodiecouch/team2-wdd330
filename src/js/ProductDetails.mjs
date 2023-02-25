@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
   let discount = (product.FinalPrice / product.SuggestedRetailPrice) * 100; 
@@ -55,6 +55,7 @@ export default class ProductDetails
         cart.push(this.product);
        
         setLocalStorage("so-cart", cart);
+        alertMessage(`${this.product.NameWithoutBrand} added to cart!`);
         
         //animate cart
         let shake = "shake";
