@@ -11,12 +11,14 @@ productList.init();
 
 console.log(productList);
 */
-import { loadHeaderFooter } from "./utils.mjs";
+
+import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
 loadHeaderFooter();
 
+const numCartItems = getLocalStorage('so-cart').length;
 const cartLogo = document.querySelector(".cart");
 
 let superScript = document.createElement("sup");
-superScript.textContent = localStorage.length;
+superScript.textContent = numCartItems;
 
 cartLogo.appendChild(superScript);
