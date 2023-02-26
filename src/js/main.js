@@ -15,10 +15,13 @@ console.log(productList);
 import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
 loadHeaderFooter();
 
-const numCartItems = getLocalStorage('so-cart').length;
-const cartLogo = document.querySelector(".cart");
-
-let superScript = document.createElement("sup");
-superScript.textContent = numCartItems;
-
-cartLogo.appendChild(superScript);
+loadHeaderFooter().then(() => {
+    // at this point the header and footer are in the DOM and you can find the `div.cart` element
+    const numCartItems = getLocalStorage('so-cart').length;
+    const cartLogo = document.querySelector(".cart");
+  
+    let superScript = document.createElement("sup");
+    superScript.textContent = numCartItems;
+  
+    cartLogo.appendChild(superScript);
+  });
